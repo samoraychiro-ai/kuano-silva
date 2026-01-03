@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat SDP I - SQLite</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Tela de Login -->
+        <div id="login-screen" class="screen">
+            <div class="login-box">
+                <h1><i class="fas fa-comments"></i> Chat SDP I</h1>
+                <div class="form-group">
+                    <label>Nome de Usuário:</label>
+                    <input type="text" id="username" placeholder="Seu nome...">
+                </div>
+                <button id="join-btn" class="btn-primary">Entrar no Chat</button>
+            </div>
+        </div>
+
+        <!-- Tela do Chat -->
+        <div id="chat-screen" class="screen hidden">
+            <div class="chat-container">
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <h3><i class="fas fa-users"></i> Online (<span id="online-count">0</span>)</h3>
+                    </div>
+                    <ul id="online-users"></ul>
+                    <div class="chat-info">
+                        <p id="connection-status" class="connected"><i class="fas fa-wifi"></i> Online</p>
+                        <button id="leave-btn" class="btn-danger">Sair</button>
+                    </div>
+                </div>
+
+                <div class="main-chat">
+                    <!-- Abas de Navegação -->
+                    <div class="chat-tabs">
+                        <button class="tab-btn active" data-target="public-view">Chat Global</button>
+                        <button class="tab-btn" data-target="private-view" id="tab-private-btn">Chat Privado <span id="private-badge" class="hidden">!</span></button>
+                    </div>
+
+                    <!-- Conteúdo do Chat Global -->
+                    <div id="public-view" class="tab-content">
+                        <div id="messages" class="messages"></div>
+                        <div class="message-input">
+                            <input type="text" id="message-input" placeholder="Mensagem para todos...">
+                            <button id="send-btn" class="btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo do Chat Privado -->
+                    <div id="private-view" class="tab-content hidden">
+                        <div class="private-header">
+                            Conversando com: <select id="private-recipient"></select>
+                        </div>
+                        <div id="private-chat" class="messages"></div>
+                        <div class="message-input">
+                            <input type="text" id="private-message" placeholder="Mensagem privada..." disabled>
+                            <button id="send-private" disabled><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                    <div id="typing-indicator" class="typing-indicator hidden">
+                        <span id="typing-user"></span> está escrevendo...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
